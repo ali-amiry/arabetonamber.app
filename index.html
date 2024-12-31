@@ -1,10 +1,20 @@
-
 <!DOCTYPE html>
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>محول الأرقام إلى حروف والعكس</title>
+
+    <!-- ربط ملف manifest الخاص بالتطبيق -->
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- تخصيص اللون في شريط العنوان -->
+    <meta name="theme-color" content="#007bff">
+
+    <!-- إضافة الأيقونات الخاصة بالتطبيق -->
+    <link rel="icon" href="/images/icons/icon-192x192.png" sizes="192x192">
+    <link rel="icon" href="/images/icons/icon-512x512.png" sizes="512x512">
+
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -83,7 +93,6 @@
 </head>
 <body>
     <div class="container">
-        
         <p>
         سياسة وخصوصية . الاشارات . البحرين . شيعي
         </p>
@@ -176,6 +185,17 @@
                 inputText.placeholder = "حول من حروف إلى أرقام";
             }
             inputText.value = '';  // مسح النص عند التغيير
+        }
+
+        // تسجيل Service Worker لدعم الـ PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js').then(registration => {
+                    console.log('Service Worker تم تسجيله بنجاح:', registration);
+                }).catch(error => {
+                    console.log('فشل تسجيل Service Worker:', error);
+                });
+            });
         }
     </script>
 </body>
